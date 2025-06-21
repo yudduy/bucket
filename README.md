@@ -159,10 +159,6 @@ This project, **Threads SwiftUI**, has been developed **for educational purposes
 
 Additionally, the name **"Threads SwiftUI"** was generated during a **brainstorming session with AI**, and any resemblance to existing social media platforms or services is purely **coincidental**.
 
-## Contributing 🤝
-
-Contributions are welcome! If you'd like to contribute to ThreadsSwiftUI, please fork the repository and create a pull request with your changes.
-
 ## Acknowledgements 🙏
 
 ThreadsSwiftUI is inspired by the functionality and design of Threads from Meta.
@@ -175,11 +171,6 @@ Template mockup from https://previewed.app/template/AFC0B4CB
 
 ## Visitors Count
 <img width="auto" src="https://profile-counter.glitch.me/threads_swiftui/count.svg" />
-
-## Please Share & Star the repository to keep me motivated.
-<a href = "https://github.com/sergio11/threads_swiftui/stargazers">
-   <img src = "https://img.shields.io/github/stars/sergio11/threads_swiftui" />
-</a>
 
 ## License ⚖️
 
