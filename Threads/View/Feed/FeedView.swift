@@ -2,48 +2,45 @@
 //  FeedView.swift
 //  Threads
 //
-//  Created by Sergio Sánchez Sánchez on 18/7/24.
-//
 
 import SwiftUI
 
 struct FeedView: View {
-    
+
     @StateObject var viewModel = FeedViewModel()
-    
+
     var body: some View {
         NavigationStack {
             FeedViewContent(
-                threads: viewModel.threads,
+                updates: viewModel.progressUpdates,
                 onLikeTapped: {
-                    viewModel.likeThread(threadId: $0)
+                    viewModel.likeUpdate(updateId: $0)
                 },
-                onSharedTapped: {
-                    viewModel.onShareTapped(thread: $0)
+                onShareTapped: {
+                    viewModel.onShareTapped(update: $0)
                 }
             )
             .refreshable {
-                viewModel.fetchThreads()
+                viewModel.fetchFeedUpdates()
             }
-            .navigationTitle("Threads")
+            .navigationTitle("Bucket List")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        viewModel.fetchThreads()
+                        viewModel.fetchFeedUpdates()
                     } label: {
                         Image(systemName: "arrow.counterclockwise")
                             .foregroundColor(.black)
                             .imageScale(.small)
                     }
                 }
-            }.onAppear {
-                viewModel.fetchThreads()
+            }
+            .onAppear {
+                viewModel.fetchFeedUpdates()
             }
             .modifier(LoadingAndErrorOverlayModifier(isLoading: $viewModel.isLoading, errorMessage: $viewModel.errorMessage))
-            // Show the share sheet as a modal when the user taps the share button
             .sheet(isPresented: $viewModel.showShareSheet) {
-                // Display the share sheet with the content to share
                 ShareActivityView(activityItems: [viewModel.shareContent])
             }
         }
@@ -51,22 +48,31 @@ struct FeedView: View {
 }
 
 private struct FeedViewContent: View {
-    
-    var threads: [ThreadBO]
+
+    var updates: [ProgressUpdateBO]
     var onLikeTapped: ((String) -> Void)
-    var onSharedTapped: ((ThreadBO) -> Void)
-    
+    var onShareTapped: ((ProgressUpdateBO) -> Void)
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack {
-                ForEach(threads) { thread in
-                    ThreadCell(thread: thread, onProfileImageTapped: {
-                        AnyView(ProfileView(user: thread.user))
-                    }, onLikeTapped: {
-                        onLikeTapped(thread.id)
-                    }, onShareTapped: {
-                        onSharedTapped(thread)
-                    })
+                ForEach(updates) { update in
+                    ProgressUpdateCell(
+                        update: update,
+                        goalTitle: nil,
+                        onProfileImageTapped: {
+                            AnyView(ProfileView(user: update.user))
+                        },
+                        onLikeTapped: {
+                            onLikeTapped(update.id)
+                        },
+                        onShareTapped: {
+                            onShareTapped(update)
+                        },
+                        onCellTapped: {
+                            // TODO: Navigate to GoalDetailView
+                        }
+                    )
                 }
             }
         }

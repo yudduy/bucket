@@ -119,7 +119,7 @@ private struct ProfileViewContent: View {
                 }
                 
                 if let user = user {
-                    UserContentListView(user: user)
+                    UserGoalsListView(user: user)
                 }
             }
         }

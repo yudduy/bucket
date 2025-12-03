@@ -10,9 +10,14 @@ import Factory
 import Combine
 
 @MainActor
-class HomeViewModel: BaseViewModel {
-    
+class HomeViewModel: BaseUserViewModel {
+
     @Published var selectedTab = 0
     @Published var showCreateThreadView = false
-    
+    @Published var currentUser: UserBO?
+
+    override func onCurrentUserLoaded(user: UserBO) {
+        super.onCurrentUserLoaded(user: user)
+        self.currentUser = user
+    }
 }

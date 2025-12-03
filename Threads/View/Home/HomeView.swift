@@ -25,9 +25,14 @@ struct HomeView: View {
         .sheet(isPresented: $viewModel.showCreateThreadView, onDismiss: {
             viewModel.selectedTab = 0
         }) {
-            CreateThreadView()
+            if let currentUser = viewModel.currentUser {
+                GoalPickerSheet(user: currentUser)
+            }
         }
         .tint(.black)
+        .onAppear {
+            viewModel.loadCurrentUser()
+        }
     }
     
     // MARK: - Tab Views
