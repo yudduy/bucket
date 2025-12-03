@@ -10,7 +10,7 @@ import SwiftUI
 struct DeveloperCreditView: View {
     
     var body: some View {
-        Text("Made by Duy Nguyen © 2024")
+        Text("Made by Duy Nguyen © 2025")
             .font(.footnote)
             .foregroundColor(.white)
             .multilineTextAlignment(.center)
