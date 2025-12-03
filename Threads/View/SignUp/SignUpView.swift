@@ -42,12 +42,12 @@ struct SignUpView: View {
 private struct SingUpContent: View {
     var body: some View {
         VStack {
-            Image("app_logo")
+            Image(systemName: "target")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: .infinity)
-                .edgesIgnoringSafeArea(.all)
-            Text("Connect with others, share your moments, and be part of a real-time community.")
+                .frame(width: 80, height: 80)
+                .foregroundColor(.white)
+            Text("Create your bucket list. Track your journey. Inspire others.")
                 .font(.title3)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)

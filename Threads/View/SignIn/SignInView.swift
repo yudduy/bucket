@@ -40,17 +40,17 @@ struct SignInView: View {
 private struct SingInContent: View {
     var body: some View {
         VStack {
-            Image("app_logo")
+            Image(systemName: "target")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: .infinity)
-                .edgesIgnoringSafeArea(.all)
-            Text("Welcome to Threads")
+                .frame(width: 80, height: 80)
+                .foregroundColor(.white)
+            Text("Welcome to Gosh")
                  .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .padding()
-            Text("Join the conversation. Share your thoughts and connect with friends in real time.")
+            Text("Track your goals. Share your progress. Achieve your dreams together.")
                 .font(.title3)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
