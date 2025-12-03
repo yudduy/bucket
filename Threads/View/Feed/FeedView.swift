@@ -69,9 +69,7 @@ private struct FeedViewContent: View {
                         onShareTapped: {
                             onShareTapped(update)
                         },
-                        onCellTapped: {
-                            // TODO: Navigate to GoalDetailView
-                        }
+                        onCellTapped: nil
                     )
                 }
             }

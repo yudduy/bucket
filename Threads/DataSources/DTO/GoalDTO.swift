@@ -5,7 +5,6 @@
 
 import Foundation
 
-/// Data Transfer Object for representing a goal.
 internal struct GoalDTO: Decodable {
     let goalId: String
     let userId: String

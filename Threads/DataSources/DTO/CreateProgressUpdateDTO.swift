@@ -5,7 +5,6 @@
 
 import Foundation
 
-/// Data Transfer Object for creating a new progress update.
 internal struct CreateProgressUpdateDTO: Decodable {
     var updateId: String
     var goalId: String
