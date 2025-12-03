@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class BaseViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false

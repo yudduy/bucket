@@ -8,6 +8,7 @@
 import Foundation
 import Factory
 
+@MainActor
 class BaseUserViewModel: BaseViewModel {
     
     @Injected(\.getCurrentUserUseCase) private var getCurrentUserUseCase: GetCurrentUserUseCase
