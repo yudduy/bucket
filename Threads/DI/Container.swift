@@ -16,43 +16,102 @@ extension Container {
     }
 }
 
+// MARK: - Goal Infrastructure
+
 extension Container {
-    
-    var threadMapper: Factory<ThreadMapper> {
-        self { ThreadMapper(userMapper: self.userMapper()) }.singleton
+
+    var goalMapper: Factory<GoalMapper> {
+        self { GoalMapper(userMapper: self.userMapper()) }.singleton
     }
-    
-    var createThreadMapper: Factory<CreateThreadMapper> {
-        self { CreateThreadMapper() }.singleton
+
+    var createGoalMapper: Factory<CreateGoalMapper> {
+        self { CreateGoalMapper() }.singleton
     }
-    
-    var threadsDataSource: Factory<ThreadsDataSource> {
-        self { FirestoreThreadsDataSourceImpl() }.singleton
+
+    var goalDataSource: Factory<GoalDataSource> {
+        self { FirestoreGoalDataSourceImpl() }.singleton
     }
-    
-    var threadsRepository: Factory<ThreadsRepository> {
-        self { ThreadsRepositoryImpl(
-            threadsDataSource: self.threadsDataSource(), threadMapper: self.threadMapper(), createThreadMapper: self.createThreadMapper(), userDataSource: self.userDataSource(), authenticationRepository: self.authenticationRepository()) }.singleton
+
+    var goalRepository: Factory<GoalRepository> {
+        self { GoalRepositoryImpl(
+            goalDataSource: self.goalDataSource(),
+            goalMapper: self.goalMapper(),
+            createGoalMapper: self.createGoalMapper(),
+            userDataSource: self.userDataSource(),
+            authenticationRepository: self.authenticationRepository()
+        ) }.singleton
     }
-    
-    var fetchThreadsUseCase: Factory<FetchThreadsUseCase> {
-        self { FetchThreadsUseCase(threadsRepository: self.threadsRepository(), authRepository: self.authenticationRepository()) }
+
+    var createGoalUseCase: Factory<CreateGoalUseCase> {
+        self { CreateGoalUseCase(
+            authRepository: self.authenticationRepository(),
+            goalRepository: self.goalRepository()
+        ) }
     }
-    
-    var fetchOwnThreadsUseCase: Factory<FetchOwnThreadsUseCase> {
-        self { FetchOwnThreadsUseCase(threadsRepository: self.threadsRepository(), authRepository: self.authenticationRepository()) }
+
+    var fetchUserGoalsUseCase: Factory<FetchUserGoalsUseCase> {
+        self { FetchUserGoalsUseCase(goalRepository: self.goalRepository()) }
     }
-    
-    var createThreadUseCase: Factory<CreateThreadUseCase> {
-        self { CreateThreadUseCase(authRepository: self.authenticationRepository(), threadsRepository: self.threadsRepository()) }
+
+    var fetchOwnGoalsUseCase: Factory<FetchOwnGoalsUseCase> {
+        self { FetchOwnGoalsUseCase(goalRepository: self.goalRepository()) }
     }
-    
-    var fetchThreadsByUserUseCase: Factory<FetchThreadsByUserUseCase> {
-        self { FetchThreadsByUserUseCase(threadsRepository: self.threadsRepository()) }
+
+    var deleteGoalUseCase: Factory<DeleteGoalUseCase> {
+        self { DeleteGoalUseCase(goalRepository: self.goalRepository()) }
     }
-    
-    var likeThreadUseCase: Factory<LikeThreadUseCase> {
-        self { LikeThreadUseCase(authRepository: self.authenticationRepository(), threadRepository: self.threadsRepository()) }
+}
+
+// MARK: - Progress Update Infrastructure
+
+extension Container {
+
+    var progressUpdateMapper: Factory<ProgressUpdateMapper> {
+        self { ProgressUpdateMapper(userMapper: self.userMapper()) }.singleton
+    }
+
+    var createProgressUpdateMapper: Factory<CreateProgressUpdateMapper> {
+        self { CreateProgressUpdateMapper() }.singleton
+    }
+
+    var progressUpdateDataSource: Factory<ProgressUpdateDataSource> {
+        self { FirestoreProgressUpdateDataSourceImpl() }.singleton
+    }
+
+    var progressUpdateRepository: Factory<ProgressUpdateRepository> {
+        self { ProgressUpdateRepositoryImpl(
+            updateDataSource: self.progressUpdateDataSource(),
+            goalDataSource: self.goalDataSource(),
+            updateMapper: self.progressUpdateMapper(),
+            createUpdateMapper: self.createProgressUpdateMapper(),
+            userDataSource: self.userDataSource(),
+            authenticationRepository: self.authenticationRepository()
+        ) }.singleton
+    }
+
+    var fetchFeedUpdatesUseCase: Factory<FetchFeedUpdatesUseCase> {
+        self { FetchFeedUpdatesUseCase(
+            updateRepository: self.progressUpdateRepository(),
+            authRepository: self.authenticationRepository()
+        ) }
+    }
+
+    var createProgressUpdateUseCase: Factory<CreateProgressUpdateUseCase> {
+        self { CreateProgressUpdateUseCase(
+            authRepository: self.authenticationRepository(),
+            updateRepository: self.progressUpdateRepository()
+        ) }
+    }
+
+    var likeProgressUpdateUseCase: Factory<LikeProgressUpdateUseCase> {
+        self { LikeProgressUpdateUseCase(
+            authRepository: self.authenticationRepository(),
+            updateRepository: self.progressUpdateRepository()
+        ) }
+    }
+
+    var fetchProgressUpdatesByGoalUseCase: Factory<FetchProgressUpdatesByGoalUseCase> {
+        self { FetchProgressUpdatesByGoalUseCase(updateRepository: self.progressUpdateRepository()) }
     }
 }
 
