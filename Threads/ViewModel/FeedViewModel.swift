@@ -2,30 +2,28 @@
 //  FeedViewModel.swift
 //  Threads
 //
-//  Created by Sergio Sánchez Sánchez on 1/8/24.
-//
 
 import Foundation
 import Combine
 import Factory
 
 @MainActor
-class FeedViewModel: BaseThreadsActionsViewModel {
-    
-    @Injected(\.fetchThreadsUseCase) private var fetchThreadsUseCase: FetchThreadsUseCase
-    
-    func fetchThreads() {
+class FeedViewModel: BaseProgressUpdateActionsViewModel {
+
+    @Injected(\.fetchFeedUpdatesUseCase) private var fetchFeedUpdatesUseCase: FetchFeedUpdatesUseCase
+
+    func fetchFeedUpdates() {
         executeAsyncTask({
-            return try await self.fetchThreadsUseCase.execute()
-        }) { [weak self] (result: Result<[ThreadBO], Error>) in
+            return try await self.fetchFeedUpdatesUseCase.execute()
+        }) { [weak self] (result: Result<[ProgressUpdateBO], Error>) in
             guard let self = self else { return }
-            if case .success(let threads) = result {
-                self.onFetchThreadsCompleted(threads: threads)
+            if case .success(let updates) = result {
+                self.onFetchUpdatesCompleted(updates: updates)
             }
         }
     }
-    
-    private func onFetchThreadsCompleted(threads: [ThreadBO]) {
-        self.threads = threads
+
+    private func onFetchUpdatesCompleted(updates: [ProgressUpdateBO]) {
+        self.progressUpdates = updates
     }
 }
