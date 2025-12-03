@@ -18,11 +18,32 @@ extension PreviewProvider {
 
 class DeveloperPreview {
     static let shared = DeveloperPreview()
-    
+
     let user = UserBO(id: NSUUID().uuidString, fullname: "Sergio Sánchez", email: "dreamsoftware92@gmail.com", username: "ssanchez", isPrivateProfile: false, isFollowedByAuthUser: false)
-    
-    let thread = ThreadBO(threadId: "123456567", ownerUid: "123", caption: "This is a test thread", timestamp: Date(), likes: 0, user: UserBO(id: NSUUID().uuidString, fullname: "Sergio Sánchez", email: "dreamsoftware92@gmail.com", username: "ssanchez", isPrivateProfile: false, isFollowedByAuthUser: false))
-    
+
+    let goal = GoalBO(
+        goalId: "goal123",
+        userId: "123",
+        title: "Learn Spanish",
+        description: "Become conversational by end of year",
+        category: "Learning",
+        createdAt: Date(),
+        updateCount: 5,
+        user: nil
+    )
+
+    let progressUpdate = ProgressUpdateBO(
+        updateId: "update123",
+        goalId: "goal123",
+        userId: "123",
+        content: "Completed my first lesson today!",
+        imageUrl: nil,
+        timestamp: Date(),
+        likes: 3,
+        isLikedByAuthUser: false,
+        user: nil
+    )
+
     let notification = NotificationBO(
             id: "notif123",
             title: "New Follower",

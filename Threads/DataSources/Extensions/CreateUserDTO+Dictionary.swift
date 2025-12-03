@@ -16,6 +16,8 @@ internal extension CreateUserDTO {
             "fullname": fullname,
             "followers": [String](),
             "following": [String](),
+            "followersCount": 0,
+            "followingCount": 0,
             "isPrivateProfile": false
         ]
     }
