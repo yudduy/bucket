@@ -1,0 +1,24 @@
+//
+//  CreateUserDTO+Dictionary.swift
+//  Bucket
+//
+//  Created by Sergio Sánchez Sánchez on 8/11/24.
+//
+
+import Foundation
+
+internal extension CreateUserDTO {
+    func asDictionary() -> [String: Any] {
+        return [
+            "userId": userId,
+            "username": username,
+            "email": email,
+            "fullname": fullname,
+            "followers": [String](),
+            "following": [String](),
+            "followersCount": 0,
+            "followingCount": 0,
+            "isPrivateProfile": false
+        ]
+    }
+}
